@@ -122,8 +122,8 @@ class ejemploPila {
     public static void main(String[] args)
     {
         pila nuevaPila = new pila();
-        int agregarXElementos = 10;
-        int eliminrarXElementos = 10;
+        int agregarXElementos = 3;
+        int eliminrarXElementos = 3;
         Random randomGenerator = new Random();
         examinarPila(nuevaPila);
         for (int idx = 1; idx <= agregarXElementos; ++idx){

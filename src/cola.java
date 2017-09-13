@@ -137,8 +137,8 @@ class ejemploCola {
     public static void main(String[] args)
     {
         cola nuevaCola = new cola();
-        int agregarXElementos = 10;
-        int eliminrarXElementos = 10;
+        int agregarXElementos = 3;
+        int eliminrarXElementos = 3;
         Random randomGenerator = new Random();
         examinarCola(nuevaCola);
         for (int idx = 1; idx <= agregarXElementos; ++idx){
