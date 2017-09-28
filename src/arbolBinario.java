@@ -6,6 +6,7 @@ class nodoBinario{
     public nodoBinario[] hijos = new nodoBinario[2];
     public nodoBinario hijoIzq = hijos[0];
     public nodoBinario hijoDer = hijos[1];
+    private int nivel = 0;
     /**
      * log: Wrapper de la funcion System.out.print
      * @param str para imprimir
@@ -20,6 +21,9 @@ class nodoBinario{
      */
     public nodoBinario(nodoBinario parent) {
         this.nodoPadre = parent;
+        if (parent != null) {
+            this.nivel = parent.nivel + 1;
+        }
         hijoIzq = hijoDer = null;
     }
     /**
@@ -28,6 +32,14 @@ class nodoBinario{
      */
     public Object getValor() {
         return valor;
+    }
+
+    /**
+     * getValor: regresa el valor almacenado en el nodo
+     * @return String valor
+     */
+    public int getNivel() {
+        return nivel;
     }
 
     /**
@@ -123,6 +135,27 @@ class arbolBinario {
         }
     }
 
+    /**
+     * recorridoAmplitud: Realiza el recorrido por amplitud (por nivel),
+     * de forma recursiva evalua si el nivel de un nodo es igual al nivel que buscamos
+     * @param nodo un nodoBinario
+     * @param nivelABuscar entero que representa el nivel a buscar
+     * @return String
+     */
+    public String recorridoAmplitud(nodoBinario nodo,  int nivelABuscar) {
+        String cadena = "";
+        if (nodo == null) {
+            return  cadena;
+        }
+        if (nodo.getNivel() == nivelABuscar) {
+            return " " + nodo.getValor();
+        } else {
+            cadena = cadena + recorridoAmplitud(nodo.hijoIzq, nivelABuscar);
+            cadena = cadena + recorridoAmplitud(nodo.hijoDer, nivelABuscar);
+        }
+        return cadena;
+    }
+
     /** convertirArbolAArray:
      * Invoca convertirNodoAArray utilizando como parámetros la raiz y el índice 0
      */
@@ -170,6 +203,13 @@ class ejemploArbolBinario {
         nodoBinario hD_nietoDer_der = cuentas.agregarNodo(hijoDer_nietoDer, 89, false);
 
         cuentas.convertirArbolAArray();
+
+        log("Buscando nodos en el nivel 0: \n" + cuentas.recorridoAmplitud(raiz,0));
+        log("Buscando nodos en el nivel 1: \n" + cuentas.recorridoAmplitud(raiz,1));
+        log("Buscando nodos en el nivel 2: \n" + cuentas.recorridoAmplitud(raiz,2));
+        log("Buscando nodos en el nivel 3: \n" + cuentas.recorridoAmplitud(raiz,3));
+        log("Buscando nodos en el nivel 4: \n" + cuentas.recorridoAmplitud(raiz,4));
+        log("Buscando nodos en el nivel 5: \n" + cuentas.recorridoAmplitud(raiz,5));
 
     }
 }
